@@ -1,4 +1,4 @@
-package operations;
+package nodes;
 import tree.Node;
 
 public abstract class BinaryOperation implements Node{

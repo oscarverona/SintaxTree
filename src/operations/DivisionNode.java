@@ -1,5 +1,6 @@
 package operations;
 
+import nodes.BinaryOperation;
 import tree.Node;
 
 public class DivisionNode extends BinaryOperation{

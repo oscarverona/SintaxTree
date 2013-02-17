@@ -5,7 +5,7 @@ import nodes.VariableNode;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class OperationTests {
+public class OperationNumbersTests {
     
     @Test
     public void operationAddTest() {
