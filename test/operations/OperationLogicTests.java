@@ -1,8 +1,6 @@
 package operations;
 
-import nodes.ConstantNode;
 import nodes.LogicConstantNode;
-import nodes.VariableNode;
 import operations.logic.AndNode;
 import operations.logic.OrNode;
 import static org.junit.Assert.*;

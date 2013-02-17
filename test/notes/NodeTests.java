@@ -1,6 +1,7 @@
 package notes;
 
 import nodes.ConstantNode;
+import nodes.LogicConstantNode;
 import nodes.VariableNode;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -35,5 +36,16 @@ public class NodeTests {
         assertEquals(0.00001, empty.evaluate(), 0.0);
         assertEquals(0, integer.evaluate(), 0.0);
         assertEquals(-2.5, decimal.evaluate(), 0.0); 
+    }
+      
+    @Test
+    public void evaluateLogicConstantsTest() {
+        LogicConstantNode empty = new LogicConstantNode();
+        LogicConstantNode trueNode = new LogicConstantNode(true);
+        LogicConstantNode falseNode = new LogicConstantNode(false);
+        
+        assertEquals(false, empty.evaluate());
+        assertEquals(true, trueNode.evaluate());
+        assertEquals(false, falseNode.evaluate());       
     }
  }   
