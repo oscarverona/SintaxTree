@@ -5,6 +5,7 @@ import tree.Node;
 public class MultiplierNode extends BinaryOperation{
 
     public MultiplierNode() {
+        super(null, null);
     }
 
     public MultiplierNode(Node leftNode, Node rightNode) {
@@ -15,6 +16,5 @@ public class MultiplierNode extends BinaryOperation{
     public double evaluate() {
         return getLeftNode().evaluate() * getRightNode().evaluate();
     }
-    
     
 }
