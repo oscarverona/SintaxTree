@@ -53,18 +53,6 @@ public class NumberOperation implements Operation {
             Logger.getLogger(NumberOperation.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-            /*String signature = "add" + operand1.getSimpleClassName() +
-                   operand2.getSimpleClassName();
-            Method method = methodsMap.get(signature);
-            try {
-                return method.invoke(TypeOperator.class,
-                                     operand1.getValue(),
-                                     operand2.getValue());
-
-            } catch (IllegalAccessException | IllegalArgumentException |
-                     InvocationTargetException ex) {
-                return null;
-            }*/
     }
 
     @Override
