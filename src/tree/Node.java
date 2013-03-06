@@ -1,5 +1,7 @@
 package tree;
 
+import type.Type;
+
 public interface Node {
-    public double evaluate();
+    public Type evaluate();
 }

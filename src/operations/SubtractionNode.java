@@ -2,19 +2,18 @@ package operations;
 
 import nodes.BinaryOperation;
 import tree.Node;
+import type.Type;
 
 public class SubtractionNode extends BinaryOperation{
-    
-    public SubtractionNode() {
-        super(null, null);
-    }
+    private final NumberOperation operator = new NumberOperation('-');
 
     public SubtractionNode(Node leftNode, Node rightNode) {
         super(leftNode, rightNode);
     }
-     
+
     @Override
-    public double evaluate() {
-        return getLeftNode().evaluate() - getRightNode().evaluate();
-    }    
+    public Type evaluate() {
+         return operator.calculate(getLeftNode().evaluate(),
+                                  getRightNode().evaluate());
+    }
 }

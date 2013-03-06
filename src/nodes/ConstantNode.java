@@ -1,21 +1,22 @@
 package nodes;
 
 import tree.Node;
+import type.Type;
 
 public class ConstantNode implements Node{
-    private final double value;  
-    
+    private final Type value;
+
     public ConstantNode(){
-        value = 0.0;
+        value = new Type<>(0.0);
     }
-    
-    public ConstantNode(double value){
+
+    public ConstantNode(Type value){
         this.value = value;
     }
 
     @Override
-    public double evaluate() {
+    public Type evaluate() {
         return value;
     }
-    
+
 }

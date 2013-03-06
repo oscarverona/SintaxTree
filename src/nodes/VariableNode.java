@@ -1,25 +1,27 @@
 package nodes;
 
 import tree.Node;
+import type.Type;
+
 
 public class VariableNode implements Node{
-    private double value;  
-    
+    private Type value;
+
     public VariableNode(){
-        value = 0.0;
+        value = new Type<>(0.0);
     }
-    
-    public VariableNode(double value){
+
+    public VariableNode(Type value){
         this.value = value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Type value) {
         this.value = value;
     }
 
     @Override
-    public double evaluate() {
+    public Type evaluate() {
         return value;
     }
-    
+
 }
