@@ -83,4 +83,14 @@ public class TypeOperator {
     public Double multiply(Double operand1, Double operand2) {
         return operand1 * operand2;
     }
+
+    @Operator(symbol = '&')
+    public Boolean and(Boolean operand1, Boolean operand2) {
+        return operand1 && operand2;
+    }
+
+    @Operator(symbol = '|')
+    public Boolean or(Boolean operand1, Boolean operand2) {
+        return operand1 || operand2;
+    }
 }

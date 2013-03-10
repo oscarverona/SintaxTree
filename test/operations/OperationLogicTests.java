@@ -1,62 +1,46 @@
 package operations;
 
-import nodes.LogicConstantNode;
-import operations.logic.AndNode;
-import operations.logic.OrNode;
+import tree.BinaryOperation;
+import tree.ConstantNode;
 import static org.junit.Assert.*;
 import org.junit.Test;
+import type.Type;
 
 public class OperationLogicTests {
 
     @Test
     public void operationAndTest() {
-        AndNode and;
-        try {
-            and = new AndNode();
-            and.evaluate();
-            assertTrue(true);
-        } catch (NullPointerException ex) {
-        }
+        ConstantNode trueNode = new ConstantNode(new Type<>(true));
+        ConstantNode falseNode = new ConstantNode(new Type<>(false));
 
-        LogicConstantNode trueNode = new LogicConstantNode(true);
-        LogicConstantNode falseNode = new LogicConstantNode(false);
+        BinaryOperation and = new BinaryOperation(Operation.AND, trueNode, trueNode);
+        assertEquals(true, and.evaluate().getValue());
 
-        and = new AndNode(trueNode, trueNode);
-        assertEquals(true, and.evaluate());
+        and = new BinaryOperation(Operation.AND, trueNode, falseNode);
+        assertEquals(false, and.evaluate().getValue());
 
-        and = new AndNode(trueNode, falseNode);
-        assertEquals(false, and.evaluate());
+        and = new BinaryOperation(Operation.AND, falseNode, trueNode);
+        assertEquals(false, and.evaluate().getValue());
 
-        and = new AndNode(falseNode, trueNode);
-        assertEquals(false, and.evaluate());
-
-        and = new AndNode(falseNode, falseNode);
-        assertEquals(false, and.evaluate());
+        and = new BinaryOperation(Operation.AND, falseNode, falseNode);
+        assertEquals(false, and.evaluate().getValue());
     }
 
     @Test
     public void operationOrTest() {
-        OrNode or;
-        try {
-            or = new OrNode();
-            or.evaluate();
-            assertTrue(true);
-        } catch (NullPointerException ex) {
-        }
+        ConstantNode trueNode = new ConstantNode(new Type<>(true));
+        ConstantNode falseNode = new ConstantNode(new Type<>(false));
 
-        LogicConstantNode trueNode = new LogicConstantNode(true);
-        LogicConstantNode falseNode = new LogicConstantNode(false);
-       
-        or = new OrNode(trueNode, trueNode);
-        assertEquals(true, or.evaluate());
+        BinaryOperation or = new BinaryOperation(Operation.OR, trueNode, trueNode);
+        assertEquals(true, or.evaluate().getValue());
 
-        or = new OrNode(trueNode, falseNode);
-        assertEquals(true, or.evaluate());
+        or = new BinaryOperation(Operation.OR, trueNode, falseNode);
+        assertEquals(true, or.evaluate().getValue());
 
-        or = new OrNode(falseNode, trueNode);
-        assertEquals(true, or.evaluate());
+        or = new BinaryOperation(Operation.OR, falseNode, trueNode);
+        assertEquals(true, or.evaluate().getValue());
 
-        or = new OrNode(falseNode, falseNode);
-        assertEquals(false, or.evaluate());
+        or = new BinaryOperation(Operation.OR, falseNode, falseNode);
+        assertEquals(false, or.evaluate().getValue());
     }
 }

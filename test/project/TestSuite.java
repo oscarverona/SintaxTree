@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
     project.SyntaxTreeTests.class,
-    notes.NodeTests.class,
+    tree.NodeTests.class,
     operations.OperationLogicTests.class,
     operations.OperationNumbersTests.class,
 })

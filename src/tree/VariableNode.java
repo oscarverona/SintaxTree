@@ -1,4 +1,4 @@
-package nodes;
+package tree;
 
 import tree.Node;
 import type.Type;
@@ -22,6 +22,16 @@ public class VariableNode implements Node{
     @Override
     public Type evaluate() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
+    }
+
+    @Override
+    public int getOperatorPrecedence() {
+        throw new UnsupportedOperationException("Not supported.");
     }
 
 }

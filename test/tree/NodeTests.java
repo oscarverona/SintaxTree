@@ -1,8 +1,5 @@
-package notes;
+package tree;
 
-import nodes.ConstantNode;
-import nodes.LogicConstantNode;
-import nodes.VariableNode;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import type.Type;
@@ -12,11 +9,9 @@ public class NodeTests {
 
     @Test
     public void evaluateConstantsTest() {
-        ConstantNode empty = new ConstantNode();
         ConstantNode integer = new ConstantNode(new Type<>(1));
         ConstantNode decimal = new ConstantNode(new Type<>(2.5));
 
-        assertEquals(0.0, (Double) empty.evaluate().getValue(), 0.0);
         assertEquals(1, (Integer) integer.evaluate().getValue(), 0.0);
         assertEquals(2.5, (Double) decimal.evaluate().getValue(), 0.0);
     }
@@ -42,12 +37,10 @@ public class NodeTests {
 
     @Test
     public void evaluateLogicConstantsTest() {
-        LogicConstantNode empty = new LogicConstantNode();
-        LogicConstantNode trueNode = new LogicConstantNode(true);
-        LogicConstantNode falseNode = new LogicConstantNode(false);
+        ConstantNode trueNode = new ConstantNode(new Type<>(true));
+        ConstantNode falseNode = new ConstantNode(new Type<>(false));
 
-        assertEquals(false, empty.evaluate());
-        assertEquals(true, trueNode.evaluate());
-        assertEquals(false, falseNode.evaluate());
+        assertEquals(true, trueNode.evaluate().getValue());
+        assertEquals(false, falseNode.evaluate().getValue());
     }
  }

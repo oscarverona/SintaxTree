@@ -1,15 +1,10 @@
 package project;
 
-import nodes.ConstantNode;
-import nodes.LogicConstantNode;
-import operations.AdderNode;
-import operations.DivisionNode;
-import operations.MultiplierNode;
-import operations.SubtractionNode;
-import operations.logic.AndNode;
-import operations.logic.OrNode;
+import operations.Operation;
 import static org.junit.Assert.*;
 import org.junit.Test;
+import tree.BinaryOperation;
+import tree.ConstantNode;
 import type.Type;
 
 
@@ -21,8 +16,8 @@ public class SyntaxTreeTests {
         ConstantNode two = new ConstantNode(new Type<>(2));
         ConstantNode three = new ConstantNode(new Type<>(3));
 
-        MultiplierNode mult = new MultiplierNode(two, three);
-        AdderNode tree = new AdderNode(one, mult);
+        BinaryOperation mult = new BinaryOperation(Operation.MULTIPLY, two, three);
+        BinaryOperation tree = new BinaryOperation(Operation.ADD, one, mult);
 
         assertEquals(7, (Integer) tree.evaluate().getValue(), 0.0);
     }
@@ -35,25 +30,25 @@ public class SyntaxTreeTests {
         ConstantNode one = new ConstantNode(new Type<>(1));
         ConstantNode zero = new ConstantNode(new Type<>(0));
 
-        DivisionNode div = new DivisionNode(six, two);
-        MultiplierNode mult = new MultiplierNode(two, div);
-        SubtractionNode rest1 = new SubtractionNode(four, mult);
-        SubtractionNode rest2 = new SubtractionNode(one, zero);
-        AdderNode tree = new AdderNode(rest1, rest2);
+        BinaryOperation div = new BinaryOperation(Operation.DIVIDE, six, two);
+        BinaryOperation mult = new BinaryOperation(Operation.MULTIPLY, two, div);
+        BinaryOperation rest1 = new BinaryOperation(Operation.SUBTRACT, four, mult);
+        BinaryOperation rest2 = new BinaryOperation(Operation.SUBTRACT, one, zero);
+        BinaryOperation tree = new BinaryOperation(Operation.ADD, rest1, rest2);
 
         assertEquals(-1, tree.evaluate().getValue());
     }
 
     @Test
     public void longLogicTreeTest(){
-        LogicConstantNode falseNode = new LogicConstantNode(false);
-        LogicConstantNode trueNode = new LogicConstantNode(true);
+        ConstantNode falseNode = new ConstantNode(new Type<>(false));
+        ConstantNode trueNode = new ConstantNode(new Type<>(true));
 
-        AndNode and = new AndNode(trueNode, trueNode);
-        OrNode or = new OrNode(trueNode, falseNode);
-        OrNode or2 = new OrNode(or, and);
-        AndNode tree = new AndNode(trueNode, or2);
+        BinaryOperation and = new BinaryOperation(Operation.AND, trueNode, trueNode);
+        BinaryOperation or = new BinaryOperation(Operation.OR, trueNode, falseNode);
+        BinaryOperation or2 = new BinaryOperation(Operation.OR, or, and);
+        BinaryOperation tree = new BinaryOperation(Operation.AND, trueNode, or2);
 
-        assertEquals(true, tree.evaluate());
+        assertEquals(true, tree.evaluate().getValue());
     }
 }

@@ -14,4 +14,9 @@ public class Type<T> {
     public String getSimpleClassName() {
         return value.getClass().getSimpleName();
     }
+
+    @Override
+    public String toString(){
+        return value.toString();
+    }
 }
