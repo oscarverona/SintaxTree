@@ -38,8 +38,6 @@ public class Calculator {
     }
 
     public Type calculate(Type operand1, Type operand2) {
-        System.out.println(buildSignature(operand1, operand2));
-        System.out.println(methodsMap.get(buildSignature(operand1, operand2)));
         Method method = methodsMap.get(buildSignature(operand1, operand2));
         try {
             Object result = method.invoke(new NumberTypeOperator(),
