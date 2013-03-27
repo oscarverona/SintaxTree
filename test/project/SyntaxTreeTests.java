@@ -1,6 +1,6 @@
 package project;
 
-import operations.Operation;
+import operations.Operator;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import tree.BinaryOperation;
@@ -16,8 +16,8 @@ public class SyntaxTreeTests {
         ConstantNode two = new ConstantNode(new Type<>(2));
         ConstantNode three = new ConstantNode(new Type<>(3));
 
-        BinaryOperation mult = new BinaryOperation(Operation.MULTIPLY, two, three);
-        BinaryOperation tree = new BinaryOperation(Operation.ADD, one, mult);
+        BinaryOperation mult = new BinaryOperation(Operator.MULTIPLY, two, three);
+        BinaryOperation tree = new BinaryOperation(Operator.ADD, one, mult);
 
         assertEquals(7, (Integer) tree.evaluate().getValue(), 0.0);
     }
@@ -30,11 +30,11 @@ public class SyntaxTreeTests {
         ConstantNode one = new ConstantNode(new Type<>(1));
         ConstantNode zero = new ConstantNode(new Type<>(0));
 
-        BinaryOperation div = new BinaryOperation(Operation.DIVIDE, six, two);
-        BinaryOperation mult = new BinaryOperation(Operation.MULTIPLY, two, div);
-        BinaryOperation rest1 = new BinaryOperation(Operation.SUBTRACT, four, mult);
-        BinaryOperation rest2 = new BinaryOperation(Operation.SUBTRACT, one, zero);
-        BinaryOperation tree = new BinaryOperation(Operation.ADD, rest1, rest2);
+        BinaryOperation div = new BinaryOperation(Operator.DIVIDE, six, two);
+        BinaryOperation mult = new BinaryOperation(Operator.MULTIPLY, two, div);
+        BinaryOperation rest1 = new BinaryOperation(Operator.SUBTRACT, four, mult);
+        BinaryOperation rest2 = new BinaryOperation(Operator.SUBTRACT, one, zero);
+        BinaryOperation tree = new BinaryOperation(Operator.ADD, rest1, rest2);
 
         assertEquals(-1, tree.evaluate().getValue());
     }
@@ -44,10 +44,10 @@ public class SyntaxTreeTests {
         ConstantNode falseNode = new ConstantNode(new Type<>(false));
         ConstantNode trueNode = new ConstantNode(new Type<>(true));
 
-        BinaryOperation and = new BinaryOperation(Operation.AND, trueNode, trueNode);
-        BinaryOperation or = new BinaryOperation(Operation.OR, trueNode, falseNode);
-        BinaryOperation or2 = new BinaryOperation(Operation.OR, or, and);
-        BinaryOperation tree = new BinaryOperation(Operation.AND, trueNode, or2);
+        BinaryOperation and = new BinaryOperation(Operator.AND, trueNode, trueNode);
+        BinaryOperation or = new BinaryOperation(Operator.OR, trueNode, falseNode);
+        BinaryOperation or2 = new BinaryOperation(Operator.OR, or, and);
+        BinaryOperation tree = new BinaryOperation(Operator.AND, trueNode, or2);
 
         assertEquals(true, tree.evaluate().getValue());
     }

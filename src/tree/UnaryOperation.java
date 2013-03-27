@@ -1,7 +1,7 @@
 package tree;
 
 import operations.Calculator;
-import operations.Operation;
+import operations.Operator;
 import type.Type;
 
 public class UnaryOperation implements Node {
@@ -9,10 +9,9 @@ public class UnaryOperation implements Node {
     private Node node;
     private final Calculator calculator;
 
-    public UnaryOperation(Operation operation, Node node) {
+    public UnaryOperation(Operator operation, Node node) {
         calculator = new Calculator(operation);
         this.node = node;
-
     }
 
     public Node getNode() {

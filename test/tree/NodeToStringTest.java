@@ -1,6 +1,6 @@
 package tree;
 
-import operations.Operation;
+import operations.Operator;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import type.Type;
@@ -22,13 +22,13 @@ public class NodeToStringTest {
         ConstantNode integer = new ConstantNode(new Type<>(1));
         VariableNode decimal = new VariableNode(new Type<>(2.5));
 
-        BinaryOperation add = new BinaryOperation(Operation.ADD, decimal, integer);
+        BinaryOperation add = new BinaryOperation(Operator.ADD, decimal, integer);
         assertEquals("2.5 + 1", add.toString());
 
-        BinaryOperation mult = new BinaryOperation(Operation.MULTIPLY, integer, integer);
+        BinaryOperation mult = new BinaryOperation(Operator.MULTIPLY, integer, integer);
         assertEquals("1 * 1", mult.toString());
 
-        BinaryOperation subtract = new BinaryOperation(Operation.SUBTRACT, integer, decimal);
+        BinaryOperation subtract = new BinaryOperation(Operator.SUBTRACT, integer, decimal);
         assertEquals("1 - 2.5", subtract.toString());
     }
 
@@ -38,11 +38,25 @@ public class NodeToStringTest {
         ConstantNode two = new ConstantNode(new Type<>(2));
         VariableNode three = new VariableNode(new Type<>(3));
 
-
-        BinaryOperation mult = new BinaryOperation(Operation.MULTIPLY, one, three);
+        BinaryOperation mult = new BinaryOperation(Operator.MULTIPLY, one, three);
         assertEquals("1 * 3", mult.toString());
 
-        BinaryOperation add = new BinaryOperation(Operation.ADD, two, mult);
-        assertEquals("2 + (1 * 3)", add.toString());
+        BinaryOperation add = new BinaryOperation(Operator.ADD, two, one);
+        assertEquals("2 + 1", add.toString());
+
+        BinaryOperation addSub = new BinaryOperation(Operator.SUBTRACT, add, three);
+        assertEquals("2 + 1 - 3", addSub.toString());
+
+        BinaryOperation addMult = new BinaryOperation(Operator.ADD, two, mult);
+        //assertEquals("2 + (1 * 3)", addMult.toString());
+
+        BinaryOperation addMult2 = new BinaryOperation(Operator.MULTIPLY, add, three);
+        //assertEquals("(2 + 1) * 3", addMult2.toString());
+
+        BinaryOperation multDivMult = new BinaryOperation(Operator.DIVIDE, mult, mult);
+        //assertEquals("(1 * 3) / (1 * 3)", multDivMult.toString());
+
+        BinaryOperation div = new BinaryOperation(Operator.DIVIDE, mult, add);
+        //assertEquals("(1 * 3) / (2 + (1 * 3))", div.toString());
     }
 }

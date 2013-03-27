@@ -13,16 +13,16 @@ public class OperationLogicTests {
         ConstantNode trueNode = new ConstantNode(new Type<>(true));
         ConstantNode falseNode = new ConstantNode(new Type<>(false));
 
-        BinaryOperation and = new BinaryOperation(Operation.AND, trueNode, trueNode);
+        BinaryOperation and = new BinaryOperation(Operator.AND, trueNode, trueNode);
         assertEquals(true, and.evaluate().getValue());
 
-        and = new BinaryOperation(Operation.AND, trueNode, falseNode);
+        and = new BinaryOperation(Operator.AND, trueNode, falseNode);
         assertEquals(false, and.evaluate().getValue());
 
-        and = new BinaryOperation(Operation.AND, falseNode, trueNode);
+        and = new BinaryOperation(Operator.AND, falseNode, trueNode);
         assertEquals(false, and.evaluate().getValue());
 
-        and = new BinaryOperation(Operation.AND, falseNode, falseNode);
+        and = new BinaryOperation(Operator.AND, falseNode, falseNode);
         assertEquals(false, and.evaluate().getValue());
     }
 
@@ -31,16 +31,16 @@ public class OperationLogicTests {
         ConstantNode trueNode = new ConstantNode(new Type<>(true));
         ConstantNode falseNode = new ConstantNode(new Type<>(false));
 
-        BinaryOperation or = new BinaryOperation(Operation.OR, trueNode, trueNode);
+        BinaryOperation or = new BinaryOperation(Operator.OR, trueNode, trueNode);
         assertEquals(true, or.evaluate().getValue());
 
-        or = new BinaryOperation(Operation.OR, trueNode, falseNode);
+        or = new BinaryOperation(Operator.OR, trueNode, falseNode);
         assertEquals(true, or.evaluate().getValue());
 
-        or = new BinaryOperation(Operation.OR, falseNode, trueNode);
+        or = new BinaryOperation(Operator.OR, falseNode, trueNode);
         assertEquals(true, or.evaluate().getValue());
 
-        or = new BinaryOperation(Operation.OR, falseNode, falseNode);
+        or = new BinaryOperation(Operator.OR, falseNode, falseNode);
         assertEquals(false, or.evaluate().getValue());
     }
 }

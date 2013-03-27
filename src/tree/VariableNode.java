@@ -1,6 +1,5 @@
 package tree;
 
-import tree.Node;
 import type.Type;
 
 
@@ -31,7 +30,7 @@ public class VariableNode implements Node{
 
     @Override
     public int getOperatorPrecedence() {
-        throw new UnsupportedOperationException("Not supported.");
+        return 0;
     }
 
 }

@@ -22,6 +22,6 @@ public class ConstantNode implements Node {
 
     @Override
     public int getOperatorPrecedence() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 0;
     }
 }

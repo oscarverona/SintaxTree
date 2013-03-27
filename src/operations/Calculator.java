@@ -1,34 +1,32 @@
 package operations;
 
-import anotations.Operator;
+import anotations.OperatorSymbol;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import type.NumberTypeOperator;
 import type.Type;
-import type.TypeOperator;
 
 public class Calculator {
 
-    private final Operation operation;
+    private final Operator operation;
     private static final HashMap<String, Method> methodsMap = new HashMap<>();
     private static final HashMap<Character, String> operationsMap = new HashMap<>();
 
     static {
-        for (Method method : TypeOperator.class.getMethods()) {
-            if (method.isAnnotationPresent(Operator.class)) {
+        for (Method method : NumberTypeOperator.class.getMethods()) {
+            if (method.isAnnotationPresent(OperatorSymbol.class)) {
                 methodsMap.put(getSignature(method), method);
-
-                Operator annotation = method.getAnnotation(Operator.class);
-                operationsMap.put(annotation.symbol(), method.getName());
+                operationsMap.put(method.getAnnotation(OperatorSymbol.class).symbol(),
+                        method.getName());
             }
         }
     }
 
-    public Calculator(Operation operation) {
+    public Calculator(Operator operation) {
         this.operation = operation;
-
     }
 
     private static String getSignature(Method method) {
@@ -40,12 +38,11 @@ public class Calculator {
     }
 
     public Type calculate(Type operand1, Type operand2) {
-        String signature = operationsMap.get(operation.getSymbol()) + operand1.getSimpleClassName()
-                + operand2.getSimpleClassName();
-
-        Method method = methodsMap.get(signature);
+        System.out.println(buildSignature(operand1, operand2));
+        System.out.println(methodsMap.get(buildSignature(operand1, operand2)));
+        Method method = methodsMap.get(buildSignature(operand1, operand2));
         try {
-            Object result = method.invoke(new TypeOperator(),
+            Object result = method.invoke(new NumberTypeOperator(),
                     operand1.getValue(),
                     operand2.getValue());
 
@@ -56,8 +53,13 @@ public class Calculator {
         }
     }
 
-    public Operation getOperation() {
+    public Operator getOperation() {
         return operation;
+    }
+
+    private String buildSignature(Type arg1, Type arg2) {
+        return operationsMap.get(operation.getSymbol()) + arg1.getSimpleClassName()
+                + arg2.getSimpleClassName();
     }
 
     @Override

@@ -15,10 +15,10 @@ public class OperationNumbersTests {
         ConstantNode intNode = new ConstantNode(new Type<>(3));
         VariableNode doubleNode = new VariableNode(new Type<>(9.0));
 
-        BinaryOperation addDoubleInt = new BinaryOperation(Operation.ADD, doubleNode, intNode);
-        BinaryOperation addDoubleDouble = new BinaryOperation(Operation.ADD, doubleNode, doubleNode);
-        BinaryOperation addIntInt = new BinaryOperation(Operation.ADD,intNode, intNode);
-        BinaryOperation addIntDouble = new BinaryOperation(Operation.ADD, intNode, doubleNode);
+        BinaryOperation addDoubleInt = new BinaryOperation(Operator.ADD, doubleNode, intNode);
+        BinaryOperation addDoubleDouble = new BinaryOperation(Operator.ADD, doubleNode, doubleNode);
+        BinaryOperation addIntInt = new BinaryOperation(Operator.ADD,intNode, intNode);
+        BinaryOperation addIntDouble = new BinaryOperation(Operator.ADD, intNode, doubleNode);
 
         assertEquals(12, (Double) addDoubleInt.evaluate().getValue(), 0.0);
         assertEquals(18, (Double) addDoubleDouble.evaluate().getValue(), 0.0);
@@ -37,10 +37,10 @@ public class OperationNumbersTests {
         ConstantNode intNode = new ConstantNode(new Type<>(3));
         VariableNode doubleNode = new VariableNode(new Type<>(9.0));
 
-        BinaryOperation addDoubleInt = new BinaryOperation(Operation.MULTIPLY, doubleNode, intNode);
-        BinaryOperation addDoubleDouble = new BinaryOperation(Operation.MULTIPLY, doubleNode, doubleNode);
-        BinaryOperation addIntInt = new BinaryOperation(Operation.MULTIPLY, intNode, intNode);
-        BinaryOperation addIntDouble = new BinaryOperation(Operation.MULTIPLY, intNode, doubleNode);
+        BinaryOperation addDoubleInt = new BinaryOperation(Operator.MULTIPLY, doubleNode, intNode);
+        BinaryOperation addDoubleDouble = new BinaryOperation(Operator.MULTIPLY, doubleNode, doubleNode);
+        BinaryOperation addIntInt = new BinaryOperation(Operator.MULTIPLY, intNode, intNode);
+        BinaryOperation addIntDouble = new BinaryOperation(Operator.MULTIPLY, intNode, doubleNode);
 
         assertEquals(27, (Double) addDoubleInt.evaluate().getValue(), 0.0);
         assertEquals(81, (Double) addDoubleDouble.evaluate().getValue(), 0.0);

@@ -1,7 +1,7 @@
 package tree;
 
 import operations.Calculator;
-import operations.Operation;
+import operations.Operator;
 import type.Type;
 
 public class BinaryOperation implements Node {
@@ -9,7 +9,7 @@ public class BinaryOperation implements Node {
     private Node leftNode, rightNode;
     private final Calculator calculator;
 
-    public BinaryOperation(Operation operation, Node leftNode, Node rightNode) {
+    public BinaryOperation(Operator operation, Node leftNode, Node rightNode) {
         calculator = new Calculator(operation);
         this.leftNode = leftNode;
         this.rightNode = rightNode;
@@ -40,7 +40,7 @@ public class BinaryOperation implements Node {
 
     private String getFormated(Node node) {
         String result = node.toString();
-        if (node instanceof BinaryOperation && node.getOperatorPrecedence() < this.getOperatorPrecedence()) {
+        if (node.getOperatorPrecedence() > this.getOperatorPrecedence()) {
             result = "(" + node + ")";
         }
         return result;
