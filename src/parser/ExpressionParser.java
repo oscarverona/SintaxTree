@@ -1,9 +1,11 @@
 package parser;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import operations.Operator;
-import tree.*;
+import tree.BinaryOperation;
+import tree.Node;
+import tree.VariableNode;
 import type.Type;
 
 public class ExpressionParser {
@@ -19,7 +21,7 @@ public class ExpressionParser {
         return toSintaxTree(rpn.parseTokens());
     }
 
-    private Node toSintaxTree(ArrayList<ExpressionToken> tokens) {
+    private Node toSintaxTree(List<ExpressionToken> tokens) {
         Stack<Node> stack = new Stack<>();
 
         for (ExpressionToken token : tokens) {
@@ -42,5 +44,4 @@ public class ExpressionParser {
     private Node extractVariableNode(ExpressionToken token) {
         return new VariableNode(new Type<>(token.getDouble()));
     }
-
 }

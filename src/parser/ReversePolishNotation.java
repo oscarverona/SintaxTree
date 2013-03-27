@@ -1,56 +1,39 @@
 package parser;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class ReversePolishNotation {
 
-    private String[] input;
+    private String input;
 
     public ReversePolishNotation(String input) {
-        this.input = input.split(" ");
+        this.input = input;
     }
 
-    public ArrayList<ExpressionToken> parseTokens() {
-        ArrayList<ExpressionToken> out = new ArrayList<>();
+    public List<ExpressionToken> parseTokens() {
+        List<ExpressionToken> result = new ArrayList<>();
         Stack<ExpressionToken> tokenStack = new Stack<>();
 
-        ExpressionToken token;
-        for (String tokenString : input) {
-            token = new ExpressionToken(tokenString);
-
+        for (ExpressionToken token : tokenList()) {
             if (token.isOperator()) {
-                while (!tokenStack.empty() && tokenStack.peek().isOperator()) {
-                    if ((tokenStack.peek().isAssociativeLeft()
-                            && comparePrecedence(token, tokenStack.peek()) <= 0)
-                            || (token.isAssociativeRight()
-                            && comparePrecedence(token, tokenStack.peek()) < 0)) {
-                        out.add(tokenStack.pop());
-                        continue;
-                    }
-                    break;
-                }
-
+                addOperands(tokenStack, token, result);
                 tokenStack.push(token);
-            }
-            else if (token.isLeftBracket()) {
+            } else if (token.isLeftBracket()) {
                 tokenStack.push(token);
-            }
-            else if (token.isRightBracket()) {
-                while (!tokenStack.empty() && !tokenStack.peek().isLeftBracket()) {
-                    out.add(tokenStack.pop());
-                }
+            } else if (token.isRightBracket()) {
+                closeBrackets(tokenStack, result);
                 tokenStack.pop();
-            }
-            else {
-                out.add(token);
+            } else {
+                result.add(token);
             }
         }
         while (!tokenStack.empty()) {
-            out.add(tokenStack.pop());
+            result.add(tokenStack.pop());
         }
 
-        return out;
+        return result;
     }
 
     private int comparePrecedence(ExpressionToken token1, ExpressionToken token2) {
@@ -59,5 +42,32 @@ public class ReversePolishNotation {
         }
         throw new IllegalArgumentException("Invalid tokens: "
                 + token1.getValue() + " " + token2.getValue());
+    }
+
+    private List<ExpressionToken> tokenList() {
+        List<ExpressionToken> tokens = new ArrayList<>();
+        for (String inputToken : input.split(" ")) {
+            tokens.add(new ExpressionToken(inputToken));
+        }
+        return tokens;
+    }
+
+    private void closeBrackets(Stack<ExpressionToken> tokenStack, List<ExpressionToken> result) {
+        while (!tokenStack.empty() && !tokenStack.peek().isLeftBracket()) {
+            result.add(tokenStack.pop());
+        }
+    }
+
+    private void addOperands(Stack<ExpressionToken> tokenStack, ExpressionToken token, List<ExpressionToken> result) {
+        while (!tokenStack.empty() && tokenStack.peek().isOperator()) {
+            if ((tokenStack.peek().isAssociativeLeft()
+                    && comparePrecedence(token, tokenStack.peek()) <= 0)
+                    || (token.isAssociativeRight()
+                    && comparePrecedence(token, tokenStack.peek()) < 0)) {
+                result.add(tokenStack.pop());
+                continue;
+            }
+            break;
+        }
     }
 }
