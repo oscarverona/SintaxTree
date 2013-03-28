@@ -45,18 +45,7 @@ public class NodeToStringTest {
         assertEquals("2 + 1", add.toString());
 
         BinaryOperation addSub = new BinaryOperation(Operator.SUBTRACT, add, three);
-        assertEquals("2 + 1 - 3", addSub.toString());
+        assertEquals("(2 + 1) - 3", addSub.toString());
 
-        BinaryOperation addMult = new BinaryOperation(Operator.ADD, two, mult);
-        //assertEquals("2 + (1 * 3)", addMult.toString());
-
-        BinaryOperation addMult2 = new BinaryOperation(Operator.MULTIPLY, add, three);
-        //assertEquals("(2 + 1) * 3", addMult2.toString());
-
-        BinaryOperation multDivMult = new BinaryOperation(Operator.DIVIDE, mult, mult);
-        //assertEquals("(1 * 3) / (1 * 3)", multDivMult.toString());
-
-        BinaryOperation div = new BinaryOperation(Operator.DIVIDE, mult, add);
-        //assertEquals("(1 * 3) / (2 + (1 * 3))", div.toString());
     }
 }

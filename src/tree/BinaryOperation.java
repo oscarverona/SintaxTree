@@ -39,10 +39,10 @@ public class BinaryOperation implements Node {
     }
 
     private String getFormated(Node node) {
-        String result = node.toString();
-        if (node.getOperatorPrecedence() > this.getOperatorPrecedence()) {
-            result = "(" + node + ")";
+        if (node.getOperatorPrecedence() != 0
+                && node.getOperatorPrecedence() <= this.getOperatorPrecedence()) {
+            return "(" + node.toString() + ")";
         }
-        return result;
+        return node.toString();
     }
 }

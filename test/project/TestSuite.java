@@ -13,6 +13,7 @@ import org.junit.runners.Suite;
     operations.OperationLogicTests.class,
     operations.OperationNumbersTests.class,
     parser.ExpressionParserTest.class,
+    parser.ReversePoslishNotationTest.class,
 })
 public class TestSuite {
 

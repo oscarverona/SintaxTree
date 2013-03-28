@@ -18,8 +18,7 @@ public class ExpressionParserTest {
     }
 
     @Test
-    public void RPNoutputTest(){
-        //assertEquals("1 2 + 3 4 / * 5 6 + - ", resultRPN);
+    public void normalExpressionTest(){
         ExpressionParser expParser = new ExpressionParser("( 1 + 2 ) * ( 3 / 4 ) - ( 5 + 6 )");
         Node node = expParser.buildTree();
         assertEquals(-8.75, (Double) node.evaluate().getValue(), 0.0);
